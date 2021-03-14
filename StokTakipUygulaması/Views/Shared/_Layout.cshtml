@@ -1,0 +1,76 @@
+﻿@using System.Security.Claims;
+@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor HttpContextAccessor
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - StokTakipUygulaması</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+
+    <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3 justify-content-center">
+       
+            
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
+                <ul class="navbar-nav w-100 justify-content-start">
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav w-100 justify-content-center">
+                    <li class="nav-item">
+                        <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">StokTakipUygulaması</a>
+                    </li>                    
+                </ul>
+                <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+            <li class="nav-item">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Giris">Giriş Yap</a>
+            </li>
+ }
+        else
+        {
+            <li class="nav-item">
+                <a class="nav-link text-dark">@HttpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Name) (@HttpContextAccessor.HttpContext.User.FindFirstValue(ClaimTypes.Role))</a>
+            </li>
+
+                            <li class="nav-item">
+                                <form class="form-inline" asp-controller="Home" asp-action="Cikis">
+                                    <button type="submit" class="nav-link btn btn-link">Çıkış Yap</button>
+                                </form>
+                            </li>}
+                </ul>
+            </div>
+       
+    </nav>
+
+
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - StokTakipUygulaması - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
