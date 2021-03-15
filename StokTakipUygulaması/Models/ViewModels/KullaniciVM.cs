@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace StokTakipUygulaması.Models.ViewModels
 {
-    public class LoginViewModel
+    public class KullaniciVM
     {
-
-        [Required]       
+        [Required]
         [Display(Name = "Kullanıcı Adı")]
         public string KullaniciAdi { get; set; }
 
@@ -18,6 +17,15 @@ namespace StokTakipUygulaması.Models.ViewModels
         [DataType(DataType.Password)]
         [Display(Name = "Şifre")]
         public string Sifre { get; set; }
+
+        [Required]
+        [Display(Name = "İsim")]
+        public string Isim { get; set; }
+
+        [Required]
+        [Display(Name = "Soyisim")]
+        public string Soyisim { get; set; }
+
 
     }
 }

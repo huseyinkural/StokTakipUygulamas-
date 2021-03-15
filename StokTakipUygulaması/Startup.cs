@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StokTakipUygulaması.Data;
+using StokTakipUygulaması.Data.Kullanicilar;
 
 namespace StokTakipUygulaması
 {
@@ -30,10 +31,12 @@ namespace StokTakipUygulaması
             services.AddAuthentication("CookieAuthentication").AddCookie("CookieAuthentication", config => {
                 config.LoginPath = "/Home/Giris";
                 config.Cookie.Name = "UserLoginCookie";
+                config.AccessDeniedPath = "/Home/Error";
 
             });
             services.AddControllersWithViews();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddScoped<IKullaniciRepository, KullaniciRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
