@@ -7,7 +7,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - StokTakipUygulaması</title>
+    <title>@ViewData["Title"] - Stok Takip Uygulaması</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
@@ -27,8 +27,16 @@
                 <li class="nav-item">
                     <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-dark" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Ürün Parametreleri
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Kategori" asp-action="Index">Kategori</a>
+                        <a class="dropdown-item text-dark" asp-area="" asp-controller="AltKategori" asp-action="Index">Alt Kategori</a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item text-dark" asp-area="" asp-controller="Birim" asp-action="Index">Birim</a>
+                    </div>
                 </li>
                 @if (User.IsInRole("Yonetici"))
                 {
@@ -37,11 +45,16 @@
                     </li>
 
                 }
-
+                <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Tedarikci" asp-action="Index">Tedarikçi</a>
+                </li>
+                <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Musteri" asp-action="Index">Müşteri</a>
+                </li>
             </ul>
             <ul class="navbar-nav w-100 justify-content-center">
                 <li class="nav-item">
-                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">StokTakipUygulaması</a>
+                    <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">STU</a>
                 </li>
             </ul>
             <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
@@ -76,7 +89,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2021 - StokTakipUygulaması - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2021 - StokTakipUygulaması
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>

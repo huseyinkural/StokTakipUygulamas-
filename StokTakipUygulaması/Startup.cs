@@ -11,7 +11,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using StokTakipUygulaması.Data;
+using StokTakipUygulaması.Data.AltKategoriRepo;
+using StokTakipUygulaması.Data.BirimRepo;
+using StokTakipUygulaması.Data.Kategoriler;
 using StokTakipUygulaması.Data.Kullanicilar;
+using StokTakipUygulaması.Data.MusteriRepo;
+using StokTakipUygulaması.Data.TedarikciRepo;
 
 namespace StokTakipUygulaması
 {
@@ -34,9 +39,17 @@ namespace StokTakipUygulaması
                 config.AccessDeniedPath = "/Home/Error";
 
             });
-            services.AddControllersWithViews();
+            services.AddControllersWithViews()
+                .AddNewtonsoftJson(options =>
+                    options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddScoped<IKullaniciRepository, KullaniciRepository>();
+            services.AddScoped<IKategoriRepository, KategoriRepository>();
+            services.AddScoped<IAltKategoriRepository, AltKategoriRepository>();
+            services.AddScoped<IBirimRepository, BirimRepository>();
+            services.AddScoped<ITedarikciRepository, TedarikciRepository>();
+            services.AddScoped<IMusteriRepository, MusteriRepository>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

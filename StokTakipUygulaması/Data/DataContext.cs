@@ -15,5 +15,10 @@ namespace StokTakipUygulaması.Data
         }
 
         public DbSet<Kullanici> Kullanicilar { get; set; }
+        public DbSet<Kategori> Kategoriler { get; set; }
+        public DbSet<AltKategori> AltKategoriler { get; set; }
+        public DbSet<Birim> Birimler { get; set; }
+        public DbSet<Tedarikci> Tedarikciler { get; set; }
+        public DbSet<Musteri> Musteriler { get; set; }
     }
 }

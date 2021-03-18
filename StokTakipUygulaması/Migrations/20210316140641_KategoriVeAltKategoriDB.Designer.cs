@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using StokTakipUygulaması.Data;
 
 namespace StokTakipUygulaması.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20210316140641_KategoriVeAltKategoriDB")]
+    partial class KategoriVeAltKategoriDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -30,29 +32,9 @@ namespace StokTakipUygulaması.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("KategoriId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
-
-                    b.HasIndex("KategoriId");
 
                     b.ToTable("AltKategoriler");
-                });
-
-            modelBuilder.Entity("StokTakipUygulaması.Models.Birim", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Isim")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Birimler");
                 });
 
             modelBuilder.Entity("StokTakipUygulaması.Models.Kategori", b =>
@@ -62,11 +44,15 @@ namespace StokTakipUygulaması.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<int?>("AltKategoriId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Isim")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AltKategoriId");
 
                     b.ToTable("Kategoriler");
                 });
@@ -98,55 +84,11 @@ namespace StokTakipUygulaması.Migrations
                     b.ToTable("Kullanicilar");
                 });
 
-            modelBuilder.Entity("StokTakipUygulaması.Models.Musteri", b =>
+            modelBuilder.Entity("StokTakipUygulaması.Models.Kategori", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Adres")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Isim")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Telefon")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Musteriler");
-                });
-
-            modelBuilder.Entity("StokTakipUygulaması.Models.Tedarikci", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Adres")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Isim")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Telefon")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Tedarikciler");
-                });
-
-            modelBuilder.Entity("StokTakipUygulaması.Models.AltKategori", b =>
-                {
-                    b.HasOne("StokTakipUygulaması.Models.Kategori", "Kategori")
-                        .WithMany("AltKategoriler")
-                        .HasForeignKey("KategoriId");
+                    b.HasOne("StokTakipUygulaması.Models.AltKategori", "AltKategori")
+                        .WithMany("Kategoriler")
+                        .HasForeignKey("AltKategoriId");
                 });
 #pragma warning restore 612, 618
         }
